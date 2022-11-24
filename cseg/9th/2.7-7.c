@@ -21,23 +21,31 @@ int  main()
 	int  a[10];
 	int  i,  j  ,n;  
 	/* 填空开始 */
-//	得不了满分，不能用桶因为会自动排序,来回遍历脑瓜仁子疼,我建议开摆
-	int b[100];
-	n=0;
-	for(j=0; j<100; j++){
-		b[j] = 0;
-	}
-	for(i  =  0;  i<10;  i++){
-		scanf("%d", &j);
-		b[j]++;
-	}
-	j=0;
-	for(i=0; i<100; i++){
-		if(b[i] !=0){
-			a[j++] = i;
-			n++;
-		}
-	}
+	n=10;
+	int k;
+	for(int i=0; i<n; i++)
+		scanf("%d", &a[i]);
+	for ( i = 0; i < n; i ++)  
+	{  
+		for ( j = i + 1; j < n; j++)  
+		{  
+			// use if statement to check duplicate element  
+			if ( a[i] == a[j])  
+			{  
+				// delete the current position of the duplicate element  
+				for ( k = j; k < n - 1; k++)  
+				{  
+					a[k] = a [k + 1];  
+				}  
+				// decrease the size of array after removing duplicate element  
+				n--;  
+				
+				// if the position of the elements is changes, don't increase the index j  
+				j--;      
+			}  
+		}  
+	}  
+	
 	/* 填空结束 */
 	
 	for(i  =  0;  i<n;  i++)
