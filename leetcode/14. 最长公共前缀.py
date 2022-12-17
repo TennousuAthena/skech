@@ -15,10 +15,9 @@ from typing import List
 
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        lcp: int = len(strs[0])
+        lcp = len(min(strs, key=len))
         for s in strs:
-            lcp:int = min(len(s), lcp)
-            for i in range(min(lcp, len(s))):
+            for i in range(len(s)):
                 if(s[i] != strs[0][i]):
                     lcp = i
                     break

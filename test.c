@@ -1,14 +1,23 @@
 #include<stdio.h>
-#include<math.h>
+int fun(char a[])
 
 
-int f(int a)
+{
 
 
-{ 
 
 
-	return a%2; 
+
+	int i=0,j=0;
+
+
+	while(a[i++]);
+
+
+	for(;i<10;i++)
+
+
+        a[i]='-';
 
 
 }
@@ -20,13 +29,13 @@ main()
 {
 
 
-	int s[8]={1,3,5,2,4,6},i,d=0;
+	char s[][10]={"English","math","physical","Chinese"};
 
 
-	for (i=0;f(s[i]);i++) d+=s[i];
+	fun(s[0]);
 
 
-	printf("%d\n",d);
+	printf("%s",s[0]);
 
 
 }
