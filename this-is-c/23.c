@@ -13,7 +13,7 @@ int StrCount(char* str1,char* str2){
 	for(int i=0;i<strlen(str1);i++){
 		for(int j=0; j< strlen(str2); j++){
 			if(str1[i+j] != str2[j]){
-				printf("str1[%d]%c != str2[%d]%c\n",i+j, str1[j+i], j,str2[j]);
+//				printf("str1[%d]%c != str2[%d]%c\n",i+j, str1[j+i], j,str2[j]);
 				break;
 			}
 			if(j == strlen(str2)-1){
