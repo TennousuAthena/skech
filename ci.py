@@ -10,10 +10,15 @@ for root, dirs, files in os.walk(".", topdown=False):
         filepath = os.path.join(root, filename)
         with open(filepath) as f:
             first_line = f.readline().strip()
+        
+        if filename.endswith(".c"):
+            compiler = "gcc"
+        else:
+            compiler = "g++"
 
         if "nocompile" in first_line:
             # Only check for errors in this file
-            exit_code = os.system(f"gcc -o /dev/null {filepath}")
+            exit_code = os.system(f"{compiler}  -fsyntax-only {filepath}")
             if exit_code != 0:
                 compile_errors += 1
         elif "cmake" in first_line:
@@ -25,7 +30,7 @@ for root, dirs, files in os.walk(".", topdown=False):
                 compile_errors += 1
         else:
             # Use gcc to compile the file
-            exit_code = os.system(f"gcc -o /dev/null {filepath}")
+            exit_code = os.system(f"{compiler} -o {filepath + '.out'} {filepath}")
             if exit_code != 0:
                 compile_errors += 1
 
