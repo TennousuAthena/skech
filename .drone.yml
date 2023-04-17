@@ -6,7 +6,7 @@ steps:
       image: gcc
       pull: if-not-exists
       environment:
-        - COMPILE_FAIL_COUNT=0
+        - COMPILE_FAIL_COUNT:0
       commands:
       - |
         for file in $(find . -type f \( -name '*.c' -o -name '*.cpp' \)); do
