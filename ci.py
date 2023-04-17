@@ -6,7 +6,7 @@ for root, dirs, files in os.walk(".", topdown=False):
     for filename in files:
         if not (filename.endswith(".c") or filename.endswith(".cpp")):
             continue
-
+        print(f"Processing {dirs} {filename}")
         filepath = os.path.join(root, filename)
         with open(filepath) as f:
             first_line = f.readline().strip()
