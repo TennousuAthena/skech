@@ -2,23 +2,21 @@
 #include <vector>
 #include <cstdio>
 
-using namespace std;
-
 int main(){
-	vector<int> v;
+	std::vector<int> v;
 	int num;
-	cin >> num;
-	while(num-- >0){
+	std::cin >> num;
+	while(num-- > 0){
 		int opration, val;
-		cin >> opration;
+		std::cin >> opration;
 		switch (opration) {
 			case 0:
-				cin >> val;
+				std::cin >> val;
 				v.push_back(val);
 				break;
 			case 1:
-				cin >> val;
-				cout << v[val] << endl;
+				std::cin >> val;
+				std::cout << v[val] << std::endl;
 				break;
 			case 2:
 				v.pop_back();
