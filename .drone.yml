@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: compile
-  image: gcc
+  image: python:3.9
   pull: if-not-exists
   commands:
   - python ci.py
