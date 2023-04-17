@@ -1,0 +1,39 @@
+kind: pipeline
+name: default
+
+steps:
+    - name: compile
+      image: gcc
+      pull: if-not-exists
+      environment:
+        - COMPILE_FAIL_COUNT=0
+      commands:
+      - |
+        for file in $(find . -type f \( -name '*.c' -o -name '*.cpp' \)); do
+          first_line=$(head -n 1 "$file")
+          if [[ $first_line == *cmake* ]]; then
+            make "$file" || ((COMPILE_FAIL_COUNT+=1))
+          elif [[ $first_line != *nocompile* ]]; then
+            gcc "$file" || ((COMPILE_FAIL_COUNT+=1))
+          fi
+        done
+      when:
+        event:
+        - push
+        - pull_request
+
+    - name: error-check
+      image: gcc
+      pull: if-not-exists
+      commands:
+      - |
+        for file in $(find . -type f \( -name '*.c' -o -name '*.cpp' \)); do
+          first_line=$(head -n 1 "$file")
+          if [[ $first_line == *nocompile* ]]; then
+            gcc -fsyntax-only "$file" || ((COMPILE_FAIL_COUNT+=1))
+          fi
+        done
+      when:
+        event:
+        - push
+        - pull_request

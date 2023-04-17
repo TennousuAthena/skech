@@ -1,4 +1,4 @@
-//mainfun.cpp
+//cmake mainfun.cpp
 #include<iostream>
 #include"Rectangle.h"
 using namespace std;

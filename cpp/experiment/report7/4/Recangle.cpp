@@ -1,4 +1,4 @@
-//Rectangle.cpp
+//nocompile Rectangle.cpp
 #include "Rectangle.h"
 void Rectangle::set(float length, float width){
 	len = length;

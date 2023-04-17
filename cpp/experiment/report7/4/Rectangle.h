@@ -1,4 +1,4 @@
-//Rectangle.h
+//nocompile Rectangle.h
 class Rectangle{
 private:
 	float len, wid;
