@@ -20,7 +20,7 @@ for root, dirs, files in os.walk(".", topdown=False):
             try:
                 with open(filepath,encoding='utf-8') as f:
                     first_line = f.readline().strip()
-            except Exception as e:
+            except:
                 print(f"⚠️ Failed to read first line of {filepath}: {e}")
                 first_line = ''
                 continue
@@ -47,7 +47,7 @@ for root, dirs, files in os.walk(".", topdown=False):
             else:
                 # Use gcc to compile the file
                 print("🔨 Compiling...")
-                exit_code = os.system(f"{compiler} -o {filepath + '.out'} '{filepath}' -lm")
+                exit_code = os.system(f"{compiler} -o {filepath + '.out'} \"{filepath}\" -lm")
                 if exit_code != 0:
                     compile_errors += 1
             process_end = time.time()
