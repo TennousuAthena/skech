@@ -1,12 +1,12 @@
-//Data structure:Page 24
-//Ë³Ğò±í
+// Data structure:Page 24
+// é¡ºåºè¡¨
 
-#include<iostream>
-#include<cstdlib>
-#define OK         1
-#define ERROR      0
-#define NOT_FOUND  -1
-#define OVERFLOW   -2
+#include <iostream>
+#include <cstdlib>
+#define OK 1
+#define ERROR 0
+#define NOT_FOUND -1
+#define OVERFLOW -2
 #define LIST_INIT_SIZE 100
 #define LISTINCREMENT 10
 
@@ -14,111 +14,119 @@ using namespace std;
 typedef int ElemType;
 
 typedef short int Status;
-typedef struct sqList{
-        ElemType* elem;
-        int length;
-        int listsize;
-}SqList;
+typedef struct sqList
+{
+	ElemType *elem;
+	int length;
+	int listsize;
+} SqList;
 
 /**
- * @brief Ë³Ğò±íµÄ³õÊ¼»¯
- * @param L 
+ * @brief é¡ºåºè¡¨çš„åˆå§‹åŒ–
+ * @param L
  * @return Status
  */
-Status InitList_Sq(SqList &L){
-	cout << "³õÊ¼»¯Ò»¸ö´óĞ¡Îª" << LIST_INIT_SIZE << "µÄË³Ğò±í" <<endl;
-	L.elem=(ElemType*)malloc(LIST_INIT_SIZE*sizeof(ElemType));
-	if(!L.elem)
+Status InitList_Sq(SqList &L)
+{
+	cout << "åˆå§‹åŒ–ä¸€ä¸ªå¤§å°ä¸º" << LIST_INIT_SIZE << "çš„é¡ºåºè¡¨" << endl;
+	L.elem = (ElemType *)malloc(LIST_INIT_SIZE * sizeof(ElemType));
+	if (!L.elem)
 		exit(OVERFLOW);
-	L.length=0;
-	L.listsize=LIST_INIT_SIZE;
-    return OK; 
+	L.length = 0;
+	L.listsize = LIST_INIT_SIZE;
+	return OK;
 }
 
 /**
- * @brief Ë³Ğò±í²åÈë
- * 
- * @param L Ë³Ğò±í
- * @param e ²åÈëÎ»ÖÃ
- * @param i ÔªËØÄÚÈİ
- * 
+ * @brief é¡ºåºè¡¨æ’å…¥
+ *
+ * @param L é¡ºåºè¡¨
+ * @param e æ’å…¥ä½ç½®
+ * @param i å…ƒç´ å†…å®¹
+ *
  * @return Status
  */
-Status ListInsert_Sq(SqList& L,int i,ElemType e){ //DS:page 24
-	cout << "ÏòË³Ğò±íÎ»ÖÃ#"<<i<<"²åÈëÔªËØ'"<<e<<"'" << endl;
-	//ÓÃÓÚÉêÇëĞÂ¿Õ¼ä
-	//       if(i<1||i>(L.length+1)) return ERROR;
-	//       if(L.length>=L.listsize){
-	//          ElemType* newbase=(ElemType*)realloc(L.elem,(L.listsize+LISTINCREMENT)*sizeof(ElemType));
-	//          if(!newbase) exit(OVERFLOW);
-	//          L.elem=newbase;
-	//          L.listsize+=LISTINCREMENT;
-	//          }
-       ElemType *q=&(L.elem[i-1]),*p;
-       for(p=&(L.elem[L.length-1]);p>=q;--p)
-          *(p+1)=*p;
-       *q=e;
-       ++(L.length);
-       return OK;
+Status ListInsert_Sq(SqList &L, int i, ElemType e)
+{ // DS:page 24
+	cout << "å‘é¡ºåºè¡¨ä½ç½®#" << i << "æ’å…¥å…ƒç´ '" << e << "'" << endl;
+	// ç”¨äºç”³è¯·æ–°ç©ºé—´
+	//        if(i<1||i>(L.length+1)) return ERROR;
+	//        if(L.length>=L.listsize){
+	//           ElemType* newbase=(ElemType*)realloc(L.elem,(L.listsize+LISTINCREMENT)*sizeof(ElemType));
+	//           if(!newbase) exit(OVERFLOW);
+	//           L.elem=newbase;
+	//           L.listsize+=LISTINCREMENT;
+	//           }
+	ElemType *q = &(L.elem[i - 1]), *p;
+	for (p = &(L.elem[L.length - 1]); p >= q; --p)
+		*(p + 1) = *p;
+	*q = e;
+	++(L.length);
+	return OK;
 }
 
 /**
- * @brief Ë³Ğò±íÉ¾³ıÔªËØ
- * 
- * @param L Ë³Ğò±í
- * @param pos É¾³ıÎ»ÖÃ
- * 
+ * @brief é¡ºåºè¡¨åˆ é™¤å…ƒç´ 
+ *
+ * @param L é¡ºåºè¡¨
+ * @param pos åˆ é™¤ä½ç½®
+ *
  * @return Status
  */
-Status ListDel_Sq(SqList& L, int pos){
-	cout << "ÕıÔÚÉ¾³ıÎ»ÖÃ#"<< pos << "µÄÔªËØ" << endl;
-	if(pos >= L.length)
+Status ListDel_Sq(SqList &L, int pos)
+{
+	cout << "æ­£åœ¨åˆ é™¤ä½ç½®#" << pos << "çš„å…ƒç´ " << endl;
+	if (pos >= L.length)
 		return OVERFLOW;
-	// ´ÓºóÏòÇ°ÒÆ¶¯ÔªËØ,¸²¸ÇÉ¾³ıÎ»ÖÃ
-	for (int i = pos; i < L.length; i++) {
+	// ä»åå‘å‰ç§»åŠ¨å…ƒç´ ,è¦†ç›–åˆ é™¤ä½ç½®
+	for (int i = pos; i < L.length; i++)
+	{
 		L.elem[i - 1] = L.elem[i];
 	}
-	
+
 	L.length--;
 	return OK;
 }
 
 /**
- * @brief Ë³Ğò±í²éÕÒµÚÒ»¸öÄÚÈİ
- * 
- * @param L ±í
- * @param content ²éÕÒÄÚÈİ
- * 
- * @return Î»ÖÃ
+ * @brief é¡ºåºè¡¨æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå†…å®¹
+ *
+ * @param L è¡¨
+ * @param content æŸ¥æ‰¾å†…å®¹
+ *
+ * @return ä½ç½®
  */
-Status ListFind_Sq(SqList& L, ElemType content){
-	for(int pos=0; pos<L.listsize; pos++){
-		if(L.elem[pos] == content)
-		{	
-			cout << "Ë³Ğò±íÖµÎª'" << content <<"'µÄÔªËØÎ»ÓÚ#" << pos << endl;
+Status ListFind_Sq(SqList &L, ElemType content)
+{
+	for (int pos = 0; pos < L.listsize; pos++)
+	{
+		if (L.elem[pos] == content)
+		{
+			cout << "é¡ºåºè¡¨å€¼ä¸º'" << content << "'çš„å…ƒç´ ä½äº#" << pos << endl;
 			return pos;
 		}
 	}
-	cout << "Î´ÄÜÕÒµ½ÖµÎª'" << content <<"'µÄÔªËØ" << endl;
+	cout << "æœªèƒ½æ‰¾åˆ°å€¼ä¸º'" << content << "'çš„å…ƒç´ " << endl;
 	return NOT_FOUND;
 }
 
-int main(){
-	cout<<"´ó¼ÒºÃ°¡£¬ÎÒÊÇË³Ğò±í£¬½ñÌìÀ´µã´ó¼ÒÏë¿´µÄ¶«Î÷\n";
-    int i;
-    SqList L;
-    InitList_Sq(L);
-	 
-    for(i=1;i<=10;i++){
-       ListInsert_Sq(L,i,i);
-    }
-    for(i=0;i<L.length;i++){
-       cout<< "ÎÒÊÇĞòºÅ#" << i<<"ÎÒµÄÖµÊÇ'"<<L.elem[i]<<"'\n";
-    }
-	
+int main()
+{
+	cout << "å¤§å®¶å¥½å•Šï¼Œæˆ‘æ˜¯é¡ºåºè¡¨ï¼Œä»Šå¤©æ¥ç‚¹å¤§å®¶æƒ³çœ‹çš„ä¸œè¥¿\n";
+	int i;
+	SqList L;
+	InitList_Sq(L);
+
+	for (i = 1; i <= 10; i++)
+	{
+		ListInsert_Sq(L, i, i);
+	}
+	for (i = 0; i < L.length; i++)
+	{
+		cout << "æˆ‘æ˜¯åºå·#" << i << "æˆ‘çš„å€¼æ˜¯'" << L.elem[i] << "'\n";
+	}
+
 	ListDel_Sq(L, 2);
 	ListFind_Sq(L, 3);
-    return 0;
+	return 0;
 }
-
-
